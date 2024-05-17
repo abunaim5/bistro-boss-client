@@ -5,7 +5,7 @@ const Cover = ({ img, title, description }) => {
         <Parallax
             blur={{ min: -15, max: 15 }}
             bgImage={img}
-            bgImageAlt="the dog"
+            bgImageAlt="Cover"
             strength={-200}
         >
             <div className="hero h-[700px]">
