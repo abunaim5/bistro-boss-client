@@ -29,30 +29,10 @@ const Menu = () => {
             />
             <SectionTitle heading="TODAY'S OFFER" subHeading="Don't miss" />
             <MenuCategory items={offered} />
-            <Cover
-                img={cover2}
-                title={'DESSERTS'}
-                description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
-            />
-            <MenuCategory items={desserts} />
-            <Cover
-                img={cover3}
-                title={'PIZZA'}
-                description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
-            />
-            <MenuCategory items={pizzas} />
-            <Cover
-                img={cover4}
-                title={'SALADS'}
-                description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
-            />
-            <MenuCategory items={salads} />
-            <Cover
-                img={cover5}
-                title={'SOUPS'}
-                description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
-            />
-            <MenuCategory items={soups} />
+            <MenuCategory items={desserts} img={cover2} title={'desserts'} description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s'} />
+            <MenuCategory items={pizzas} img={cover3} title={'pizza'} description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s'} />
+            <MenuCategory items={salads} img={cover4} title={'salads'} description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s'} />
+            <MenuCategory items={soups} img={cover5} title={'soups'} description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s'} />
         </div>
     );
 };
