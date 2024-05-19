@@ -1,27 +1,55 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
+import Swal from 'sweetalert2'
+import 'animate.css';
 
 const Login = () => {
+    const { signInUser } = useContext(AuthContext);
     const [disabled, setDisabled] = useState(true);
     const captchaRef = useRef(null);
     useEffect(() => {
-        loadCaptchaEnginge(6); 
-    },[])
+        loadCaptchaEnginge(6);
+    }, [])
 
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        signInUser(email, password)
+            .then(result => {
+                const user = result.user;
+                user && Swal.fire({
+                    title: "Successfully Login",
+                    showClass: {
+                        popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                      `
+                    },
+                    hideClass: {
+                        popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                      `
+                    }
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        // console.log(email, password);
     }
 
     const handleCaptcha = () => {
         const user_submit_captcha = captchaRef.current.value;
-        if(validateCaptcha(user_submit_captcha)){
+        if (validateCaptcha(user_submit_captcha)) {
             setDisabled(false);
         }
-        else{
+        else {
             setDisabled(true);
         }
         // console.log(user_submit_captcha)
