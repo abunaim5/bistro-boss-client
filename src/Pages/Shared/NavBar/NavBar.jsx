@@ -3,40 +3,48 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
 import 'animate.css';
+import { FaShoppingCart } from "react-icons/fa";
 
 const NavBar = () => {
     const { user, signOutUser } = useContext(AuthContext);
 
     const handleLogout = () => {
         signOutUser()
-        .then(() => {
-            Swal.fire({
-                title: "Successfully Logout",
-                showClass: {
-                  popup: `
+            .then(() => {
+                Swal.fire({
+                    title: "Successfully Logout",
+                    showClass: {
+                        popup: `
                     animate__animated
                     animate__fadeInUp
                     animate__faster
                   `
-                },
-                hideClass: {
-                  popup: `
+                    },
+                    hideClass: {
+                        popup: `
                     animate__animated
                     animate__fadeOutDown
                     animate__faster
                   `
-                }
-              });
-        })
-        .catch(error => {
-            console.error(error);
-        })
+                    }
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
 
     const navLinks = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/menu'}>Our Menu</Link></li>
         <li><Link to={'/order/salad'}>Order Food</Link></li>
+        <li><Link to={'/secret'}>Secret</Link></li>
+        <li><Link to={'/'}>
+            <button className="btn btn-xs">
+                <span><FaShoppingCart /></span>
+                <div className="badge badge-secondary ">+0</div>
+            </button>
+        </Link></li>
 
         {
             user ? <>

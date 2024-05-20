@@ -3,11 +3,15 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
 import 'animate.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { signInUser } = useContext(AuthContext);
     const [disabled, setDisabled] = useState(true);
     const captchaRef = useRef(null);
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/";
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
@@ -37,6 +41,7 @@ const Login = () => {
                       `
                     }
                 });
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);

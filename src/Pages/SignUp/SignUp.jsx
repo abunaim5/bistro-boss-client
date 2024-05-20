@@ -1,24 +1,55 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+import 'animate.css';
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-    const {createUser} = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm()
     const onSubmit = (data) => {
+        console.log(data);
         createUser(data.email, data.password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error=>{
-            console.error(error);
-        })
+            .then(result => {
+                const user = result.user;
+                updateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        Swal.fire({
+                            title: "User created successfully",
+                            showClass: {
+                                popup: `
+                                animate__animated
+                                animate__fadeInUp
+                                animate__faster
+                              `
+                            },
+                            hideClass: {
+                                popup: `
+                                animate__animated
+                                animate__fadeOutDown
+                                animate__faster
+                              `
+                            }
+                        });
+                        reset()
+                        navigate('/')
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                console.log(user);
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
 
     return (
@@ -36,6 +67,13 @@ const SignUp = () => {
                             </label>
                             <input type="text" {...register("name", { required: true })} name="name" placeholder="name" className="input input-bordered" />
                             {errors.name && <span className="text-red-600">Name is required</span>}
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">PhotoURL</span>
+                            </label>
+                            <input type="text" {...register("photo", { required: true })} name="photo" placeholder="https://" className="input input-bordered" />
+                            {errors.photo && <span className="text-red-600">Photo is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
