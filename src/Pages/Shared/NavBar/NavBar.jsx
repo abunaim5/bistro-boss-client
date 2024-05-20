@@ -4,9 +4,11 @@ import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
 import 'animate.css';
 import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../Hooks/useCart";
 
 const NavBar = () => {
     const { user, signOutUser } = useContext(AuthContext);
+    const [cart] = useCart();
 
     const handleLogout = () => {
         signOutUser()
@@ -39,10 +41,10 @@ const NavBar = () => {
         <li><Link to={'/menu'}>Our Menu</Link></li>
         <li><Link to={'/order/salad'}>Order Food</Link></li>
         <li><Link to={'/secret'}>Secret</Link></li>
-        <li><Link to={'/'}>
+        <li><Link to={'/cart'}>
             <button className="btn btn-xs">
                 <span><FaShoppingCart /></span>
-                <div className="badge badge-secondary ">+0</div>
+                <div className="badge badge-secondary ">+{cart.length}</div>
             </button>
         </Link></li>
 
