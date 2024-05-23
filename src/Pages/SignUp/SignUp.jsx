@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import 'animate.css';
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import GoogleLogin from "../../SocialLogin/GoogleLogin";
 
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -105,6 +106,7 @@ const SignUp = () => {
                             <input type="submit" className="btn btn-primary" value='SignUp' />
                         </div>
                     </form>
+                    <GoogleLogin />
                 </div>
             </div>
         </div>

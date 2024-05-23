@@ -1,7 +1,9 @@
-import { FaCalendar, FaHome, FaShoppingCart } from "react-icons/fa";
+import { FaBook, FaCalendar, FaCommentAlt, FaHamburger, FaHome, FaList, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
+    const isAdmin = true;
+
     return (
         <div className="flex">
             <div>
@@ -16,12 +18,27 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                             {/* Sidebar content here */}
-                            <li><Link to='/dashboard/cart'><FaShoppingCart /> My Cart</Link></li>
-                            <li><Link to='/usrHome'><FaHome /> User Home</Link></li>
-                            <li><Link to='/mycart'><FaCalendar /> Reservation</Link></li>
-                            <li><Link to='/mycart'>My Booking</Link></li>
+                            {
+                                isAdmin ? <>
+                                    <li><Link to='/dashboard/usrHome'><FaHome />Admin Home</Link></li>
+                                    <li><Link to='/dashboard/addItems'><FaUtensils />Add Items</Link></li>
+                                    <li><Link to='/dashboard/manageItems'><FaList />Manage Items</Link></li>
+                                    <li><Link to='/dashboard/manageBookings'><FaBook />Manage Bookings</Link></li>
+                                    <li><Link to='/dashboard/users'><FaUsers />All Users</Link></li>
+                                </> : <>
+                                    <li><Link to='/dashboard/usrHome'><FaHome />User Home</Link></li>
+                                    <li><Link to='/dashboard/cart'><FaShoppingCart />My Cart</Link></li>
+                                    <li><Link to='/dashboard/cart'><FaCommentAlt />Add Review</Link></li>
+                                    <li><Link to='/dashboard/reservation'><FaCalendar />Reservation</Link></li>
+                                    <li><Link to='/dashboard/myBooking'><FaHamburger /> My Bookings</Link></li>
+                                </>
+                            }
+                            {/* shared nav links */}
                             <div className="divider"></div>
                             <li><Link to='/'>Home</Link></li>
+                            <li><Link to='/menu'>Menu</Link></li>
+                            <li><Link to='/contact'>Contact</Link></li>
+                            <li><Link to='/'></Link></li>
                         </ul>
 
                     </div>

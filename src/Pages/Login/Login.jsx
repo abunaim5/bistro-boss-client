@@ -4,6 +4,7 @@ import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
 import 'animate.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import GoogleLogin from '../../SocialLogin/GoogleLogin';
 
 const Login = () => {
     const { signInUser } = useContext(AuthContext);
@@ -95,6 +96,7 @@ const Login = () => {
                             <button disabled={disabled} type="submit" className="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <GoogleLogin />
                 </div>
             </div>
         </div>
