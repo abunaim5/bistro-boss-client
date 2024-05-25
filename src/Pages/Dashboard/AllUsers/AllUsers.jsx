@@ -6,13 +6,31 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data, refetch } = useQuery({
+    const { data = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users');
-            return res.data;
+            return res?.data;
         }
-    })
+    });
+
+    console.log(data)
+
+    const handleMakeAdmin = user => {
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.name} is Admin now`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch();
+                }
+            })
+    };
 
     const handleDeleteUser = user => {
         Swal.fire({
@@ -27,7 +45,7 @@ const AllUsers = () => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/users/${user._id}`)
                     .then(res => {
-                        if (res.deletedCount > 0) {
+                        if (res.data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "User has been deleted.",
@@ -67,7 +85,7 @@ const AllUsers = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>
-                                        <button className="btn btn-ghost text-white bg-orange-400 text-xl"><FaUsers /></button>
+                                        {user.role === 'admin' ? 'Admin' : <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost text-white bg-orange-400 text-xl"><FaUsers /></button>}
                                     </td>
                                     <td>
                                         <button onClick={() => handleDeleteUser(user)} className="btn btn-ghost text-red-600 text-xl"><FaTrash /></button>
