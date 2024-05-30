@@ -21,17 +21,17 @@ const Dashboard = () => {
                             {/* Sidebar content here */}
                             {
                                 isAdmin ? <>
-                                    <li><Link to='/dashboard/usrHome'><FaHome />Admin Home</Link></li>
+                                    <li><Link to='/dashboard/adminHome'><FaHome />Admin Home</Link></li>
                                     <li><Link to='/dashboard/addItems'><FaUtensils />Add Items</Link></li>
                                     <li><Link to='/dashboard/manageItems'><FaList />Manage Items</Link></li>
                                     <li><Link to='/dashboard/manageBookings'><FaBook />Manage Bookings</Link></li>
                                     <li><Link to='/dashboard/users'><FaUsers />All Users</Link></li>
                                 </> : <>
-                                    <li><Link to='/dashboard/usrHome'><FaHome />User Home</Link></li>
+                                    <li><Link to='/dashboard/userHome'><FaHome />User Home</Link></li>
                                     <li><Link to='/dashboard/cart'><FaShoppingCart />My Cart</Link></li>
                                     <li><Link to='/dashboard/cart'><FaCommentAlt />Add Review</Link></li>
                                     <li><Link to='/dashboard/reservation'><FaCalendar />Reservation</Link></li>
-                                    <li><Link to='/dashboard/myBooking'><FaHamburger /> My Bookings</Link></li>
+                                    <li><Link to='/dashboard/paymentHistory'><FaHamburger />My Payments</Link></li>
                                 </>
                             }
                             {/* shared nav links */}
